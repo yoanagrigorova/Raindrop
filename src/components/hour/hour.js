@@ -18,15 +18,13 @@ class Hour extends React.Component {
 
     render() {
         const {data} = this.props;
-        console.log(data);
         if(!data) return null;
 
-        console.log(data);
         let icon ='http://openweathermap.org/img/w/'+data.weather[0].icon+'.png';
         let date = new Date(data.dt*1000);
         return (
                 
-                <div className="col-xs-2">
+                <div className="col-xs-2" key={data.dt}>
                     <div className="text-center">{`${date.getUTCHours()}:${date.getMinutes()}`}</div>
                     <br />
                     <div className="text-center">

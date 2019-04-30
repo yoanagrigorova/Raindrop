@@ -16,66 +16,78 @@ class Main extends React.Component {
         this.state = {
             format: 'metric',
             search: '',
+            city: 'София'
         }
+
+        this.changeFormat = this.changeFormat.bind(this);
     }
+
+    changeFormat(unit){
+        this.setState({
+            format:unit
+        })
+    }
+
+
     render() {
         return (
             <div>
                 <header>
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 
-                        <div class="collapse navbar-collapse" id="navbarColor01">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">&#8457;</a>
+                        <div className="collapse navbar-collapse" id="navbarColor01">
+                            <ul className="navbar-nav mr-auto">
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#" onClick={()=>{this.changeFormat('metric')}}>&#8457;</a>
                                 </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">&#8451;</a>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#" onClick={()=>{this.changeFormat('imperial')}}>&#8451;</a>
                                 </li>
                             </ul>
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search" />
-                                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                            <form className="form-inline my-2 my-lg-0">
+                                <input className="form-control mr-sm-2" type="text" placeholder="Search" />
+                                <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                             </form>
                         </div>
                     </nav>
                 </header>
                 <main>
                     <section>
-                        <ul class="nav nav-tabs" id="navigation">
-                            <li class="nav-item">
-                                <Link to="/weather" class="nav-link">Прогноза</Link>
-                                {/* <a class="nav-link active" data-toggle="tab" id="showForecast" href="#">Прогноза</a> */}
+                        <ul className="nav nav-tabs" id="navigation">
+                            <li className="nav-item">
+                                <Link to="/weather" className="nav-link">Прогноза</Link>
+                                {/* <a className="nav-link active" data-toggle="tab" id="showForecast" href="#">Прогноза</a> */}
                             </li>
-                            <li class="nav-item">
-                                <Link to="winter-courorts" class="nav-link">Зимни курорти</Link>
-                                {/* <a class="nav-link" data-toggle="tab" id="showWinter" href="#">Зимни курорти</a> */}
+                            <li className="nav-item">
+                                <Link to="winter-courorts" className="nav-link">Зимни курорти</Link>
+                                {/* <a className="nav-link" data-toggle="tab" id="showWinter" href="#">Зимни курорти</a> */}
                             </li>
-                            <li class="nav-item">
-                                <Link to="summer-courorts" class="nav-link">Летни курорти</Link>
-                                {/* <a class="nav-link" data-toggle="tab" id="showSummer" href="#">Летни курорти</a> */}
+                            <li className="nav-item">
+                                <Link to="summer-courorts" className="nav-link">Летни курорти</Link>
+                                {/* <a className="nav-link" data-toggle="tab" id="showSummer" href="#">Летни курорти</a> */}
                             </li>
 
                         </ul>
                     </section>
                     <br />
                     <section>
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link " data-toggle="tab" id="showMoment" href="#now">В момента</a>
+                    <h1>{this.state.city}</h1>
+                        <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                                <a className="nav-link " data-toggle="tab" id="showMoment" href="#now">В момента</a>
                             </li>
-                            <li class="nav-item">
-                                <Link class="nav-link active" to="/24-hour">24 часа</Link>
-                                {/* <a class="nav-link active" data-toggle="tab" id="show24" href="#24">24 часа</a> */}
+                            <li className="nav-item">
+                                <Link className="nav-link active" to="/24-hour">24 часа</Link>
+                                {/* <a className="nav-link active" data-toggle="tab" id="show24" href="#24">24 часа</a> */}
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" id="showFiveDays" href="#">5-дневна</a>
+                            <li className="nav-item">
+                                <a className="nav-link" data-toggle="tab" id="showFiveDays" href="#">5-дневна</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" id="showTenDays" href="#">10-дневна</a>
+                            <li className="nav-item">
+                                <a className="nav-link" data-toggle="tab" id="showTenDays" href="#">10-дневна</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" id="showWeekend" href="#">Уикенд</a>
+                            <li className="nav-item">
+                                <a className="nav-link" data-toggle="tab" id="showWeekend" href="#">Уикенд</a>
                             </li>
                         </ul>
                     </section>
@@ -83,7 +95,7 @@ class Main extends React.Component {
                     <Switch>
                         {/* <Route exact path="/" component={Home}/> */}
                         {/* <Route path="/" component={<Hourly/>} /> */}
-                        <Route exact path="/24-hour" render={() => <Hourly />} />
+                        <Route exact path="/24-hour" render={() => <Hourly city={this.state.city} format={this.state.format}/>} />
                         {/* <Route exact path="/:username/:slug" component={Generic}/>
                         <Route exact path="/:id" component={Profile}/> */}
                         {/* <Redirect from="*" to="/"/> */}

@@ -29,22 +29,45 @@ class Hourly extends React.Component {
         super(props);
 
         this.state = {
-            hourData: null
+            hourData: null,
+            format: props.format
         }
+
+        console.log(props)
+
+        this.getWeather = this.getWeather.bind(this);
     }
 
-    componentDidMount() {
+    getWeather(city, format){
         let self = this;
-        this.props.getHourData('Sofia');
-        request('https://api.openweathermap.org/data/2.5/forecast/hourly?q=Sofia&appid=' + weatherApiKey + '&lang=bg&units=metric', { json: true }, (err, response, body) => {
+        request('https://api.openweathermap.org/data/2.5/forecast/hourly?q='+city+'&appid=' + weatherApiKey + '&lang=bg&units='+ format, { json: true }, (err, response, body) => {
             if (err) { return console.log(err); }
-            // console.log(body.list);
+            console.log(body.list);
 
             self.setState({
-                hourData: body
+                hourData: body,
+                format: format
             })
 
         })
+    }
+
+
+
+    componentDidMount() {
+        // this.props.getHourData('Sofia');
+        const {city} = this.props;
+        this.getWeather(city, this.state.format);
+        
+    }
+
+    componentWillUpdate(){
+        console.log(this.state.format, this.props.format)
+        console.log(this.state.format !== this.props.format)
+        if(this.state.format !== this.props.format){
+            console.log("update");
+            this.getWeather(this.props.city, this.props.format);
+        }
     }
 
     render() {
