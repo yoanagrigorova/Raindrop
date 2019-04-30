@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import Link from 'react-router-dom/Link';
 import './style.css';
 
 class Hour extends React.Component {
@@ -10,10 +8,25 @@ class Hour extends React.Component {
         this.state = {
             data: null
         }
+
+        this.formatDate = this.formatDate.bind(this);
     }
 
     componentDidMount() {
 
+    }
+
+    formatDate(date){
+        let hour = date.getUTCHours();
+        let minutes = date.getMinutes();
+        if(hour<10){
+            hour = '0'+hour;
+        }
+        if(minutes<10){
+            minutes = '0'+minutes;
+        }
+
+        return `${hour}:${minutes}`
     }
 
     render() {
@@ -22,10 +35,11 @@ class Hour extends React.Component {
 
         let icon ='http://openweathermap.org/img/w/'+data.weather[0].icon+'.png';
         let date = new Date(data.dt*1000);
+        date = this.formatDate(date);
         return (
                 
-                <div className="col-xs-2" key={data.dt}>
-                    <div className="text-center">{`${date.getUTCHours()}:${date.getMinutes()}`}</div>
+                <div className="col-xs-2 col-sm-2 col-md-2 col-lg-1" key={data.dt}>
+                    <div className="text-center">{date}</div>
                     <br />
                     <div className="text-center">
                         <img src={icon} width="48" height="49" alt={data.weather[0].main} title={data.weather[0].main} />

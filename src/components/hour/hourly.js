@@ -1,27 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import Link from 'react-router-dom/Link';
 import Hour from './hour';
 import './style.css';
-import weatherActions from "../../actions/weather";
 import request from 'request';
 
 const weatherApiKey = 'f631fd357c75163a46154773a513dd64';
-
-const mapStateToProps = state => {
-    return {
-        ...state.weather,
-        hourData: state.hourData
-    }
-
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getHourData: (city) => dispatch(weatherActions.getHourData(city)),
-    }
-
-};
 
 
 class Hourly extends React.Component {
@@ -62,10 +44,7 @@ class Hourly extends React.Component {
     }
 
     componentWillUpdate(){
-        console.log(this.state.format, this.props.format)
-        console.log(this.state.format !== this.props.format)
         if(this.state.format !== this.props.format){
-            console.log("update");
             this.getWeather(this.props.city, this.props.format);
         }
     }
@@ -97,7 +76,4 @@ class Hourly extends React.Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Hourly);
+export default Hourly;
