@@ -9,6 +9,8 @@ import Hourly from '../hour/hourly';
 import Moment from '../moment/index';
 import TenDays from '../tenDays/index';
 import FiveDays from '../fiveDay/index';
+import Summer from '../summerCourorts/index';
+import Winter from '../winterCourorts/index';
 
 
 class Main extends React.Component {
@@ -18,10 +20,12 @@ class Main extends React.Component {
         this.state = {
             format: 'metric',
             search: '',
-            city: 'София'
+            city: 'София',
+            location: ''
         }
 
         this.changeFormat = this.changeFormat.bind(this);
+        this.update = this.update.bind(this);
     }
 
     changeFormat(unit) {
@@ -30,8 +34,18 @@ class Main extends React.Component {
         })
     }
 
+    update(){
+        this.setState({
+            location: window.location.pathname
+        })
+    }
+
+
 
     render() {
+        console.log(this.state.location)
+        const {location} = this.state;
+
         return (
             <div>
                 <header>
@@ -57,45 +71,53 @@ class Main extends React.Component {
                     <section>
                         <ul className="nav nav-tabs" id="navigation">
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">Прогноза</Link>
+                                <Link to="/moment" className="nav-link" onClick={this.update}>Прогноза</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="winter-courorts" className="nav-link">Зимни курорти</Link>
+                                <Link to="winter-courorts" className="nav-link" onClick={this.update}>Зимни курорти</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="summer-courorts" className="nav-link">Летни курорти</Link>
+                                <Link to="summer-courorts" className="nav-link" onClick={this.update}>Летни курорти</Link>
                             </li>
 
                         </ul>
                     </section>
                     <br />
-                    <section>
-                        <h1>{this.state.city}</h1>
-                        <ul className="nav nav-tabs">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/moment">В момента</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" to="/24-hour">24 часа</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/fiveDays">5-дневна</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/tenDays">10-дневна</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/weekend">Уикенд</Link>
 
-                            </li>
-                        </ul>
-                    </section>
+                    {
+                        location !== '/summer-courorts' && location !== '/winter-courorts' &&
+                        <section>
+                            <h1>{this.state.city}</h1>
+                            <ul className="nav nav-tabs">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/moment">В момента</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" to="/24-hour">24 часа</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/fiveDays">5-дневна</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/tenDays">10-дневна</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/weekend">Уикенд</Link>
+
+                                </li>
+                            </ul>
+                        </section>
+
+                    }
+
                     <div>
                         <Switch>
                             <Route exact path="/24-hour" render={() => <Hourly city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/moment" render={() => <Moment city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/fiveDays" render={() => <FiveDays city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/tenDays" render={() => <TenDays city={this.state.city} format={this.state.format} />} />
+                            <Route exact path="/summer-courorts" render={() => <Summer format={this.state.format} />} />
+                            <Route exact path="/winter-courorts" render={() => <Winter format={this.state.format} />} />
                         </Switch>
                     </div>
                 </main>
