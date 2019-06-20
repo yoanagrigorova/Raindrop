@@ -39,7 +39,7 @@ class Hourly extends React.Component {
     componentDidMount() {
         // this.props.getHourData('Sofia');
         const {city} = this.props;
-        this.getWeather(city, this.state.format);
+        this.getWeather("Sofia", this.state.format);
         
     }
 
@@ -66,7 +66,7 @@ class Hourly extends React.Component {
                         <br />
                         <div className="text-right">Вятър:</div>
                     </div>
-                    {hourData && hourData.list.slice(0, 24).map(data => (
+                    {hourData && hourData.list && hourData.list.slice(0, 24).map(data => (
                         <Hour data={data} />
                     ))
                     }

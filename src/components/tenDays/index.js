@@ -11,7 +11,7 @@ class TenDays extends React.Component {
         this.state={
             tenDayData:null,
             format: props.format,
-            city:'София'
+            city: props.city
         }
 
         this.getWeather = this.getWeather.bind(this);
@@ -39,12 +39,24 @@ class TenDays extends React.Component {
     componentWillUpdate(){
         if(this.state.format !== this.props.format){
             this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                format: this.props.format
+            })
+        }
+
+        if(this.state.city !== this.props.city){
+            this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                city: this.props.city
+            })
         }
     }
 
     render() {
         const { tenDayData } = this.state;
         
+        console.log(tenDayData);
+
         if (!tenDayData) return null;
 
         return (

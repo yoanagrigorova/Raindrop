@@ -11,6 +11,9 @@ import TenDays from '../tenDays/index';
 import FiveDays from '../fiveDay/index';
 import Summer from '../summerCourorts/index';
 import Winter from '../winterCourorts/index';
+import cities from './cities.json';
+import favorite from "./assets/filled-star.svg";
+import star from "./assets/star.svg";
 
 
 class Main extends React.Component {
@@ -21,11 +24,21 @@ class Main extends React.Component {
             format: 'metric',
             search: '',
             city: 'София',
-            location: ''
+            location: '',
+            cities: [],
+            showSearch: false,
+            hideMenu: false
         }
 
         this.changeFormat = this.changeFormat.bind(this);
         this.update = this.update.bind(this);
+        this.renderCities = this.renderCities.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            cities: [...cities.cities]
+        })
     }
 
     changeFormat(unit) {
@@ -34,17 +47,28 @@ class Main extends React.Component {
         })
     }
 
-    update(){
+    update() {
         this.setState({
-            location: window.location.pathname
+            hideMenu: true
         })
     }
 
+    renderCities() {
+        return (
+            <div className="searchCities">
+                <ul>
+                    {this.state.cities.map((city) => {
+                        return (
+                            <li key = {city} onClick = {() => this.setState({city: city, showSearch: false})}>{city}</li>
+                        )
+                    })}
+                </ul>
 
+            </div>
+        )
+    }
 
     render() {
-        console.log(this.state.location)
-        const {location} = this.state;
 
         return (
             <div>
@@ -61,7 +85,8 @@ class Main extends React.Component {
                                 </li>
                             </ul>
                             <form className="form-inline my-2 my-lg-0">
-                                <input className="form-control mr-sm-2" type="text" placeholder="Search" />
+                                <input className="form-control mr-sm-2" type="text" onClick = {() => {this.setState({showSearch: true})}} onKeyUp = {(e) => this.setState({cities: [...cities.cities].filter(c => c.indexOf(e.target.value) !== -1)})} placeholder="Search" />
+                                {this.state.showSearch && this.renderCities()}
                                 <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                             </form>
                         </div>
@@ -71,7 +96,7 @@ class Main extends React.Component {
                     <section>
                         <ul className="nav nav-tabs" id="navigation">
                             <li className="nav-item">
-                                <Link to="/moment" className="nav-link" onClick={this.update}>Прогноза</Link>
+                                <Link to="/moment" className="nav-link" onClick={() => this.setState({hideMenu: false})}>Прогноза</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="winter-courorts" className="nav-link" onClick={this.update}>Зимни курорти</Link>
@@ -85,9 +110,11 @@ class Main extends React.Component {
                     <br />
 
                     {
-                        location !== '/summer-courorts' && location !== '/winter-courorts' &&
+                        !this.state.hideMenu &&
                         <section>
-                            <h1>{this.state.city}</h1>
+                            <h1>{this.state.city} 
+                                <img src = {star} style={{width:20, height:20}} alt="Add to favourite"/>
+                            </h1>
                             <ul className="nav nav-tabs">
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/moment">В момента</Link>

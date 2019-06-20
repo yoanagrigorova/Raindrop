@@ -7,3 +7,22 @@ main{
     width: 90%;
     margin:auto;
 }
+
+.searchCities{
+    max-height: 200px;
+    overflow-x: auto;
+    width: 300px;
+    position: absolute;
+    top: 57px;
+    right: 15px;
+    background: rgb(230, 245, 247);
+
+}
+
+.searchCities ul {
+    list-style: none;
+}
+
+.searchCities ul li {
+    cursor: pointer;
+}

@@ -11,7 +11,7 @@ class FiveDays extends React.Component {
         this.state={
             fiveDayData:null,
             format: props.format,
-            city:'София'
+            city: props.city
         }
 
         this.getWeather = this.getWeather.bind(this);
@@ -39,6 +39,16 @@ class FiveDays extends React.Component {
     componentWillUpdate(){
         if(this.state.format !== this.props.format){
             this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                format: this.props.format
+            })
+        }
+
+        if(this.state.city !== this.props.city){
+            this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                city: this.props.city
+            })
         }
     }
 
