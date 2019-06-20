@@ -27,12 +27,15 @@ class Main extends React.Component {
             location: '',
             cities: [],
             showSearch: false,
-            hideMenu: false
+            hideMenu: false, 
+            favourites: []
         }
 
         this.changeFormat = this.changeFormat.bind(this);
         this.update = this.update.bind(this);
         this.renderCities = this.renderCities.bind(this);
+        this.addToFavourite = this.addToFavourite.bind(this);
+        this.removeFromFavourites = this.removeFromFavourites.bind(this);
     }
 
     componentDidMount() {
@@ -51,6 +54,27 @@ class Main extends React.Component {
         this.setState({
             hideMenu: true
         })
+    }
+
+    addToFavourite(){
+        let favourites = [];
+        if(window.localStorage.getItem("favourites")){
+            favourites = [...JSON.parse(window.localStorage.getItem("favourites")).filter(city => city !== this.state.city)];
+        }
+        favourites.push(this.state.city);
+        window.localStorage.setItem("favourites", JSON.stringify(favourites));
+        this.setState({
+            favourites: favourites
+        });
+    }
+
+    removeFromFavourites() {
+        let favourites = this.state.favourites.filter(city => city !== this.state.city);
+        this.setState({
+            favourites : favourites
+        });
+
+        window.localStorage.setItem("favourites", JSON.stringify(favourites));
     }
 
     renderCities() {
@@ -113,7 +137,10 @@ class Main extends React.Component {
                         !this.state.hideMenu &&
                         <section>
                             <h1>{this.state.city} 
-                                <img src = {star} style={{width:20, height:20}} alt="Add to favourite"/>
+                                { this.state.favourites.indexOf(this.state.city) === -1 ?
+                                <img src = {star} style={{width:20, height:20}} alt="Add to favourite" onClick= {this.addToFavourite}/> :
+                                <img src = {favorite} style={{width:20, height:20}} alt="Added to favourite" onClick= {this.removeFromFavourites}/>
+                                }
                             </h1>
                             <ul className="nav nav-tabs">
                                 <li className="nav-item">
