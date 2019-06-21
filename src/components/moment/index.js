@@ -11,7 +11,7 @@ class Moment extends React.Component {
         this.state={
             momentData:null,
             format: props.format,
-            city:'София'
+            city:props.city
         }
 
         this.getWeather = this.getWeather.bind(this);
@@ -36,9 +36,19 @@ class Moment extends React.Component {
         
     }
 
-    componentWillUpdate(){
+    componentDidUpdate(){
         if(this.state.format !== this.props.format){
             this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                format: this.props.format
+            })
+        }
+
+        if(this.state.city !== this.props.city){
+            this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                city: this.props.city
+            })
         }
     }
 
@@ -67,19 +77,19 @@ class Moment extends React.Component {
                                 <div class="text-center">
                                     <span class="wfByHourWind">
                                         <span class="windImgTopE">&nbsp;</span>
-                                        {momentData.list[0].speed} m/s  </span>
+                                        {momentData.list[0].speed} { this.state.format === "metric" ? "m/s" : "mph"}  </span>
                                 </div>
                             </div>  
-                            <div class="col-md-5"><span id="currentTemp">{degCelsius}&deg;C</span>
+                            <div class="col-md-5"><span id="currentTemp">{degCelsius}&deg;{ this.state.format === "metric" ? "C" : "F"}</span>
                                 <div>
-                                    <span id="currentFeelsLike">Усеща се като {degCelsius}&deg;C</span>
+                                    <span id="currentFeelsLike">Усеща се като {degCelsius}&deg;{ this.state.format === "metric" ? "C" : "F"}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                    {momentData.list.map(day => (
-                    <Day data={day} />
+                    <Day data={day} format={this.state.format}/>
                     ))}
 
 

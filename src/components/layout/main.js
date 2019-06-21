@@ -94,25 +94,24 @@ class Main extends React.Component {
     }
 
     render() {
-        console.log("render");
         return (
             <div>
                 <header>
                     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-                    <img src={Logo} width="130px"/>
+                    <img src={Logo} alt="logo" width="130px"/>
                         <div className="collapse navbar-collapse" id="navbarColor01">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#" onClick={() => { this.changeFormat('metric') }}>&#8457;</a>
+                                    <a className="nav-link" href="#" onClick={() => { this.changeFormat('imperial') }}>&#8457;</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#" onClick={() => { this.changeFormat('imperial') }}>&#8451;</a>
+                                    <a className="nav-link" href="#" onClick={() => { this.changeFormat('metric') }}>&#8451;</a>
                                 </li>
                             </ul>
                             <form className="form-inline my-2 my-lg-0">
-                                <input className="form-control mr-sm-2" type="text" onClick = {() => {this.setState({showSearch: true})}} onKeyUp = {(e) => this.setState({cities: [...cities.cities].filter(c => c.indexOf(e.target.value) !== -1)})} placeholder="Search" />
+                                <input className="form-control mr-sm-2" type="text" onClick = {() => {this.setState({showSearch: !this.state.showSearch})}} onKeyUp = {(e) => this.setState({cities: [...cities.cities].filter(c => c.indexOf(e.target.value) !== -1)})} placeholder="Search" />
                                 {this.state.showSearch && this.renderCities()}
-                                <button className="btn btn-outline-light" type="submit">Search</button>
+                                {/* <button className="btn btn-outline-light" type="submit">Search</button> */}
                             </form>
                         </div>
                     </nav>
@@ -167,7 +166,6 @@ class Main extends React.Component {
 
                     <div class="weatherContent">
                         <Switch>
-                            {console.log("render2")}
                             <Route exact path="/24-hour" render={() => <Hourly city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/moment" render={() => <Moment city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/fiveDays" render={() => <FiveDays city={this.state.city} format={this.state.format} />} />

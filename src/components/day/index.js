@@ -4,7 +4,9 @@ import './style.css';
 class Day extends React.Component {
     constructor(props){
         super(props);
-        this.state={};
+        this.state={
+            format: props.format
+        };
     }
 
     convert(str) {
@@ -41,6 +43,15 @@ class Day extends React.Component {
         }
     }
 
+    
+    componentDidUpdate(){
+        if(this.state.format !== this.props.format){
+            this.setState({
+                format: this.props.format
+            })
+        }
+    }
+
     render(){
         const {data} =this.props;
 
@@ -63,12 +74,12 @@ class Day extends React.Component {
                 <div class="text-center">
                     <img src={icon} width="48" height="49" alt="{data.weather[0].description}" title="{data.weather[0].description}"/>
                 </div><br/>
-                <div class="text-center">{mintemp}&deg;C <b>|</b> {maxtemp}&deg;C </div>
+                <div class="text-center">{mintemp}&deg;{ this.state.format === "metric" ? "C" : "F"} <b>|</b> {maxtemp}&deg;{ this.state.format === "metric" ? "C" : "F"} </div>
                 <div class="text-center">{data.weather[0].description}</div><br/>
                 <div class="text-center">
                     <span class="wfByHourWind">
                         <span class="windImgTopE">&nbsp;</span>
-                        {data.speed} m/s 
+                        {data.speed} { this.state.format === "metric" ? "m/s" : "mph"} 
                     </span>
                 </div>
 
