@@ -14,6 +14,7 @@ import Winter from '../winterCourorts/index';
 import cities from './cities.json';
 import favorite from "./assets/filled-star.svg";
 import star from "./assets/star.svg";
+import Logo from './assets/logo.png';
 
 
 class Main extends React.Component {
@@ -98,7 +99,7 @@ class Main extends React.Component {
             <div>
                 <header>
                     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-
+                    <img src={Logo} width="130px"/>
                         <div className="collapse navbar-collapse" id="navbarColor01">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
@@ -111,21 +112,21 @@ class Main extends React.Component {
                             <form className="form-inline my-2 my-lg-0">
                                 <input className="form-control mr-sm-2" type="text" onClick = {() => {this.setState({showSearch: true})}} onKeyUp = {(e) => this.setState({cities: [...cities.cities].filter(c => c.indexOf(e.target.value) !== -1)})} placeholder="Search" />
                                 {this.state.showSearch && this.renderCities()}
-                                <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                                <button className="btn btn-outline-light" type="submit">Search</button>
                             </form>
                         </div>
                     </nav>
                 </header>
                 <main>
                     <section>
-                        <ul className="nav nav-tabs" id="navigation">
-                            <li className="nav-item">
+                        <ul className="nav nav-pills nav-justified pages" id="navigation">
+                            <li className="nav-item pill">
                                 <Link to="/moment" className="nav-link" onClick={() => this.setState({hideMenu: false})}>Прогноза</Link>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-item pill">
                                 <Link to="winter-courorts" className="nav-link" onClick={this.update}>Зимни курорти</Link>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-item pill">
                                 <Link to="summer-courorts" className="nav-link" onClick={this.update}>Летни курорти</Link>
                             </li>
 
@@ -135,14 +136,14 @@ class Main extends React.Component {
 
                     {
                         !this.state.hideMenu &&
-                        <section>
+                        <section class="categorytabs">
                             <h1>{this.state.city} 
                                 { this.state.favourites.indexOf(this.state.city) === -1 ?
                                 <img src = {star} style={{width:20, height:20}} alt="Add to favourite" onClick= {this.addToFavourite}/> :
                                 <img src = {favorite} style={{width:20, height:20}} alt="Added to favourite" onClick= {this.removeFromFavourites}/>
                                 }
                             </h1>
-                            <ul className="nav nav-tabs">
+                            <ul className="nav nav-pills nav-justified categories">
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/moment">В момента</Link>
                                 </li>
@@ -164,7 +165,7 @@ class Main extends React.Component {
 
                     }
 
-                    <div>
+                    <div class="weatherContent">
                         <Switch>
                             {console.log("render2")}
                             <Route exact path="/24-hour" render={() => <Hourly city={this.state.city} format={this.state.format} />} />
