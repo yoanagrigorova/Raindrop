@@ -4,7 +4,7 @@ import './style.css';
 import request from 'request';
 
 const weatherApiKey = 'f631fd357c75163a46154773a513dd64';
-
+// const weatherApiKey = 'b6907d289e10d714a6e88b30761fae22';
 
 class Hourly extends React.Component {
     constructor(props) {
@@ -12,17 +12,16 @@ class Hourly extends React.Component {
 
         this.state = {
             hourData: null,
-            format: props.format
+            format: props.format,
+            city: props.city,
         }
-
-        console.log(props)
 
         this.getWeather = this.getWeather.bind(this);
     }
 
     getWeather(city, format){
         let self = this;
-        request('https://api.openweathermap.org/data/2.5/forecast/hourly?q='+city+'&appid=' + weatherApiKey + '&lang=bg&units='+ format, { json: true }, (err, response, body) => {
+        request('https://api.openweathermap.org/data/2.5/forecast/daily?q='+city+'&appid=' + weatherApiKey + '&cnt=12&lang=bg&units='+ format, { json: true }, (err, response, body) => {
             if (err) { return console.log(err); }
             console.log(body.list);
 
@@ -34,24 +33,30 @@ class Hourly extends React.Component {
         })
     }
 
-
-
     componentDidMount() {
-        // this.props.getHourData('Sofia');
-        const {city} = this.props;
-        this.getWeather("Sofia", this.state.format);
+        this.getWeather(this.state.city, this.state.format);
         
     }
 
     componentWillUpdate(){
         if(this.state.format !== this.props.format){
             this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                format: this.props.format
+            })
+        }
+
+        if(this.state.city !== this.props.city){
+            this.getWeather(this.props.city, this.props.format);
+            this.setState({
+                city: this.props.city
+            })
         }
     }
 
     render() {
         const { hourData } = this.state;
-        console.log(this.props)
+        console.log(hourData)
         if (!hourData) return null;
 
         return (

@@ -93,7 +93,7 @@ class Main extends React.Component {
     }
 
     render() {
-
+        console.log("render");
         return (
             <div>
                 <header>
@@ -166,6 +166,7 @@ class Main extends React.Component {
 
                     <div>
                         <Switch>
+                            {console.log("render2")}
                             <Route exact path="/24-hour" render={() => <Hourly city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/moment" render={() => <Moment city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/fiveDays" render={() => <FiveDays city={this.state.city} format={this.state.format} />} />

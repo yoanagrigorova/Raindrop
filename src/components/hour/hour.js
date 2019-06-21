@@ -44,12 +44,12 @@ class Hour extends React.Component {
                     <div className="text-center">
                         <img src={icon} width="48" height="49" alt={data.weather[0].main} title={data.weather[0].main} />
                     </div>
-                    <div className="text-center">{data.main.temp_max}&deg;</div>
+                    <div className="text-center">{data.temp.max}&deg;</div>
                     <div className="text-center">{data.weather[0].description}</div>
                     <div className="text-center">
                         <span className="wfByHourWind" title="изток, тих">
                             <span className="windImgTopE">&nbsp;</span>
-                            {data.wind.speed} </span>
+                            {data.speed} </span>
                     </div>
                 </div>
         )

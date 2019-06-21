@@ -16,6 +16,7 @@ main{
     top: 57px;
     right: 15px;
     background: rgb(230, 245, 247);
+    z-index: 99999;
 
 }
 
