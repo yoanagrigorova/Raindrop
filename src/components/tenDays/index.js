@@ -36,7 +36,7 @@ class TenDays extends React.Component {
         
     }
 
-    componentWillUpdate(){
+    componentDidUpdate(){
         if(this.state.format !== this.props.format){
             this.getWeather(this.props.city, this.props.format);
             this.setState({
