@@ -1,0 +1,50 @@
+#navigation{
+    width: 35%;
+    margin: auto;
+}
+
+main{
+    width: 90%;
+    margin:auto;
+}
+
+#currentWeatherBox {
+    background-image: url("./skybg.png");
+
+}
+
+#currentFeelsLike {
+    position: relative;
+    left:17%;
+    font-size: 12px;
+}
+
+#currentTemp {
+    position: relative;
+    left:17%;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#currentWeather {
+    position: relative;
+    font-weight: bold;
+
+}
+
+.wfByHourWind span {
+    width: 90%;
+    height: 25px;
+    display: block;
+    margin: auto;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.dates {
+    color: grey;
+    font-size: 13px;
+}
+

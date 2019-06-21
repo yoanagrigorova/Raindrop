@@ -26,7 +26,7 @@ class Moment extends React.Component {
                 momentData: body,
                 format: format
             })
-
+    
         })
     }
 
@@ -44,14 +44,51 @@ class Moment extends React.Component {
 
     render() {
         const { momentData } = this.state;
-        
         if (!momentData) return null;
 
+        var degCelsius = Math.floor(momentData.list[0].temp.day);
+        var icon = 'http://openweathermap.org/img/w/' + momentData.list[0].weather[0].icon + ".png";
+
+        
+        console.log(momentData);
+
         return (
-            <div>
-                <h1>moment</h1>
+                                
+            <div class = "row d-flex justify-content-center">
+                <div class="col-md-12">
+                <div class="row no-gutters">
+                    <div class="col-md-6" id="currentWeatherBox">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div><img src={icon} width="150" height="150" alt="{data.weather[0].description}" title="{data.weather[0].description}"/>
+                                </div>
+                                <div class="text-center label">{momentData.list[0].weather[0].description}</div><br/>
+                                <div class="text-center label">Вятър</div>
+                                <div class="text-center">
+                                    <span class="wfByHourWind">
+                                        <span class="windImgTopE">&nbsp;</span>
+                                        {momentData.list[0].speed} m/s  </span>
+                                </div>
+                            </div>  
+                            <div class="col-md-5"><span id="currentTemp">{degCelsius}&deg;C</span>
+                                <div>
+                                    <span id="currentFeelsLike">Усеща се като {degCelsius}&deg;C</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   {momentData.list.map(day => (
+                    <Day data={day} />
+                    ))}
+
+
+                   
+                </div>
+                </div>
             </div>
         )
+
     }
 
 

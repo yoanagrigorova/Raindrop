@@ -26,3 +26,63 @@ main{
 .searchCities ul li {
     cursor: pointer;
 }
+
+/* --- за навигацията "прогноза", "курорти".. ---*/
+.bg-primary {
+    background-color: #39C9FF !important;
+}
+
+.nav {
+    border-width: 0.1em;
+}
+
+.nav-pills.pages {
+    background-color:  #E9ECEF;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.pill .nav-link{
+    text-align: center;
+    background-color: #E9ECEF;
+    border-radius: 0px 0px 20px 20px;
+    font-family: Helvetica, Arial;
+    font-weight: bold;
+    color: #39C9FF;    
+}
+
+.pill .nav-link:hover{
+    background-color:#39C9FF ;
+    color:  #E9ECEF;
+}
+
+
+/* --- за табовете "моментна", "5-дни" ... ---*/
+.nav-pills.nav-justified.categories .nav-link{
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 20px 20px 0px 0px;
+    border-color: #39C9FF;
+    border-bottom: none;
+    background-color: none;
+    color: #39C9FF;
+}
+
+.nav-pills.nav-justified.categories .nav-link:hover{
+    background-color: #E9ECEF;
+}
+
+.nav-pills.nav-justified.categories .nav-link.active{
+    background-color: #E9ECEF;
+}
+
+.categorytabs{
+    width: 60%;
+    margin: auto;
+}
+
+.weatherContent {
+    padding: 1em 0em 2em 0em;
+    width: 60%;
+    margin: auto;
+
+}
