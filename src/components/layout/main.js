@@ -25,7 +25,7 @@ class Main extends React.Component {
             format: 'metric',
             search: '',
             city: 'София',
-            location: '',
+            location: window.location.pathname,
             cities: [],
             showSearch: false,
             hideMenu: false, 

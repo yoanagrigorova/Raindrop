@@ -44,7 +44,7 @@ class Summer extends React.Component {
 
     }
 
-    componentWillUpdate() {
+    componentDidUpdate() {
         if (this.state.format !== this.props.format) {
             this.getWeather(this.props.format);
         }
