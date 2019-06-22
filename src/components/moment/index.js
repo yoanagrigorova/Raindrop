@@ -54,9 +54,13 @@ class Moment extends React.Component {
 
     render() {
         const { momentData } = this.state;
+
+        console.log(momentData);
+
         if (!momentData) return null;
 
         var degCelsius = Math.floor(momentData.list[0].temp.day);
+        console.log(degCelsius);
         var icon = 'http://openweathermap.org/img/w/' + momentData.list[0].weather[0].icon + ".png";
 
         

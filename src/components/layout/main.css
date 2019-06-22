@@ -3,6 +3,12 @@
     margin: auto;
 }
 
+body {
+	max-width: 2000px;
+	min-width: 1000px;
+	overflow-x: scroll;
+}
+
 main{
     width: 90%;
     margin:auto;
@@ -86,4 +92,10 @@ main{
     width: 60%;
     margin: auto;
 
+}
+
+
+#addToFavourites {
+	font-size: 12px;
+	margin-left: 5px;
 }

@@ -1,0 +1,28 @@
+
+.resort {
+    border-radius: 15px;
+    border: 2px solid #39C9FF;
+    background-image: url("../moment/skybg.png");
+    margin: 0 70px 10px 70px;
+    width: 90%;
+}
+
+.degrees {
+    font-size: 35px;
+    white-space: pre;
+}
+
+.cityDescription{
+    display: block;
+    float:left;
+}
+
+.weatherDescription {
+    margin: 10px 0px 10px 5px;
+}
+
+
+.cityName, .degrees {
+    margin: 2px 10px 0px 10px;
+}
+

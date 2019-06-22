@@ -10,13 +10,13 @@ main{
 
 #currentWeatherBox {
     background-image: url("./skybg.png");
-
 }
 
 #currentFeelsLike {
     position: relative;
     left:17%;
     font-size: 12px;
+	overflow: auto;
 }
 
 #currentTemp {
@@ -24,13 +24,9 @@ main{
     left:17%;
     font-size: 45px;
     font-weight: bold;
+	overflow: auto;
 }
 
-#currentWeather {
-    position: relative;
-    font-weight: bold;
-
-}
 
 .wfByHourWind span {
     width: 90%;

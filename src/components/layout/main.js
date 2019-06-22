@@ -43,6 +43,12 @@ class Main extends React.Component {
         this.setState({
             cities: [...cities.cities]
         })
+
+        if(this.state.location === "/summer-courorts" || this.state.location === "/winter-courorts"){
+            this.setState({
+                hideMenu: true
+            })
+        }
     }
 
     changeFormat(unit) {
@@ -109,7 +115,7 @@ class Main extends React.Component {
                                 </li>
                             </ul>
                             <form className="form-inline my-2 my-lg-0">
-                                <input className="form-control mr-sm-2" type="text" onClick = {() => {this.setState({showSearch: !this.state.showSearch})}} onKeyUp = {(e) => this.setState({cities: [...cities.cities].filter(c => c.indexOf(e.target.value) !== -1)})} placeholder="Search" />
+                                <input className="form-control mr-sm-2" type="text" onClick = {() => {this.setState({showSearch: !this.state.showSearch})}} onKeyUp = {(e) => this.setState({cities: [...cities.cities].filter(c => c.indexOf(e.target.value) !== -1)})} placeholder="Търсене" />
                                 {this.state.showSearch && this.renderCities()}
                                 {/* <button className="btn btn-outline-light" type="submit">Search</button> */}
                             </form>
@@ -140,7 +146,8 @@ class Main extends React.Component {
                                 { this.state.favourites.indexOf(this.state.city) === -1 ?
                                 <img src = {star} style={{width:20, height:20}} alt="Add to favourite" onClick= {this.addToFavourite}/> :
                                 <img src = {favorite} style={{width:20, height:20}} alt="Added to favourite" onClick= {this.removeFromFavourites}/>
-                                }
+                                } 
+								<span id = "addToFavourites">Добавете в любими</span>
                             </h1>
                             <ul className="nav nav-pills nav-justified categories">
                                 <li className="nav-item">
@@ -161,22 +168,37 @@ class Main extends React.Component {
                                 </li>
                             </ul>
                         </section>
-
+						
                     }
+					
+					<div class="courortsContent"> 
 
-                    <div class="weatherContent">
+					    <Switch>
+                            <div class="winterBackground">
+                                <Route exact path="/winter-courorts" render={() => <Winter format={this.state.format} />} />
+                            </div>
+						</Switch>
+
+                        <Switch>
+                            <div class="summerBackground">
+						        <Route exact path="/summer-courorts" render={() => <Summer format={this.state.format} />} />
+                            </div>
+                        </Switch>
+					</div>
+
+
+                   <div class="weatherContent">
                         <Switch>
                             <Route exact path="/24-hour" render={() => <Hourly city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/moment" render={() => <Moment city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/fiveDays" render={() => <FiveDays city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/tenDays" render={() => <TenDays city={this.state.city} format={this.state.format} />} />
-                            <Route exact path="/summer-courorts" render={() => <Summer format={this.state.format} />} />
-                            <Route exact path="/winter-courorts" render={() => <Winter format={this.state.format} />} />
                         </Switch>
-                    </div>
+				  </div>
+				  
+		
+				  
                 </main>
-
-
 
             </div>
         )
