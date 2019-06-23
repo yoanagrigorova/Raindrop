@@ -1,0 +1,135 @@
+.map {
+    background-image: url("./mapBulgaria.jpg");
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 902px;
+    height: 569px;
+    margin: 0px 170px 0px 170px;
+    
+}
+
+.city {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    color:white ;		    
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    margin: 0px;
+}
+
+.mapDate{
+    font-size: 15px;
+    margin-left: 170px;
+}
+
+#Silistra {
+    padding: 25px 0px 0px 600px;
+}
+
+
+#Vidin {
+    padding: 0px 0px 0px 35px;
+}
+
+#Ruse {
+    padding: 0px 0px 0px 260px;
+}
+
+#Montana{
+    padding: 0px 0px 0px 50px;  
+}
+
+#Pleven{
+    padding: 0px 0px 0px 30px;  
+}
+
+#Razgrad{
+    padding: 0px 0px 0px 80px;  
+}
+
+#Dobrich{
+    padding: 0px 0px 0px 30px;  
+}
+
+#Vratsa{
+    padding: 0px 0px 0px 130px;  
+}
+
+#VelikoTarnovo{
+    padding: 0px 0px 0px 40px;  
+}
+
+#Shumen{
+    padding: 0px 0px 0px 15px;  
+}
+
+#Lovech{
+    padding: 0px 0px 0px 250px;  
+}
+
+#Targovishte{
+    padding: 0px 0px 0px 70px;  
+}
+
+#Varna{
+    padding: 0px 0px 0px 40px;  
+}
+
+#Sofia {
+    padding: 0px 0px 0px 90px;  
+}
+
+#Gabrovo {
+    padding: 0px 0px 0px 110px;  
+}
+
+#Pernik {
+    padding: 0px 0px 0px 50px;  
+}
+
+#Pazardzhik {
+    padding: 0px 0px 0px 10px;  
+}
+
+#Sliven {
+    padding: 0px 0px 0px 40px;  
+}
+
+#Burgas {
+    padding: 0px 0px 0px 30px;  
+}
+
+#Kyustendil {
+    padding: 0px 0px 0px 30px;  
+}
+
+#StaraZagora {
+    padding: 0px 0px 0px 140px;  
+}
+
+#Yambol {
+    padding: 0px 0px 0px 10px;  
+}
+
+#Blagoevgrad {
+    padding: 0px 0px 0px 60px;  
+}
+
+#Plovdiv {
+    padding: 0px 0px 0px 30px;  
+}
+
+#Haskovo {
+    padding: 0px 0px 0px 20px;  
+}
+
+#Smolyan {
+    padding: 0px 0px 0px 220px;  
+}
+
+#Kardzhali {
+    padding: 0px 0px 0px 20px;  
+}
+
+

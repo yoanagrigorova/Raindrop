@@ -11,6 +11,7 @@ import TenDays from '../tenDays/index';
 import FiveDays from '../fiveDay/index';
 import Summer from '../summerCourorts/index';
 import Winter from '../winterCourorts/index';
+import Map from '../map/index';
 import cities from './cities.json';
 import favorite from "./assets/filled-star.svg";
 import star from "./assets/star.svg";
@@ -44,7 +45,7 @@ class Main extends React.Component {
             cities: [...cities.cities]
         })
 
-        if(this.state.location === "/summer-courorts" || this.state.location === "/winter-courorts"){
+        if(this.state.location === "/summer-courorts" || this.state.location === "/winter-courorts" || this.state.location === "/map"){
             this.setState({
                 hideMenu: true
             })
@@ -134,6 +135,10 @@ class Main extends React.Component {
                             <li className="nav-item pill">
                                 <Link to="summer-courorts" className="nav-link" onClick={this.update}>Летни курорти</Link>
                             </li>
+							<li className="nav-item pill">
+                                <Link to="map" className="nav-link" onClick={this.update}>Карта на България</Link>
+                            </li>
+
 
                         </ul>
                     </section>
@@ -183,6 +188,10 @@ class Main extends React.Component {
                             <div class="summerBackground">
 						        <Route exact path="/summer-courorts" render={() => <Summer format={this.state.format} />} />
                             </div>
+                        </Switch>
+						
+						<Switch>
+						     <Route exact path="/map" render={() => <Map format={this.state.format} />} />
                         </Switch>
 					</div>
 
