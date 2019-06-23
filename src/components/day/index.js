@@ -43,6 +43,29 @@ class Day extends React.Component {
         }
     }
 
+    generateDayOfWeek(day){
+        if (day == "Sun") {
+            return "Неделя";
+        }
+        if (day == "Mon") {
+            return "Понеделник";
+        }
+        if (day == "Tue") {
+            return "Вторник";
+        }
+        if (day == "Wed") {
+            return "Сряда";
+        }
+        if (day == "Thu") {
+            return "Четвъртък";
+        }
+        if (day == "Fri") {
+            return "Петък";
+        }
+        if (day == "Sat") {
+            return "Събота";
+        }
+    }
     
     componentDidUpdate(){
         if(this.state.format !== this.props.format){
@@ -57,12 +80,20 @@ class Day extends React.Component {
 
         let icon ='http://openweathermap.org/img/w/'+ data.weather[0].icon+'.png';
         let date = new Date(data.dt*1000).toDateString();
+        console.log(date);
 
+        if(this.props.fiveTenDays === true) {
+            let day=date.substr(0,date.indexOf(' '));
+            var label = this.generateDayOfWeek(day);
+            date = this.convert(date);
+        }
+
+        else {
         // convert date into dd-mm-yyyy (Така че да не е на английски)
         date = this.convert(date);
         // за "Днес", "Утре", "Вдругиден"
         var label = this.generateLabel(date);
-
+        }
         var mintemp = Math.floor(data.temp.min);
         var maxtemp = Math.floor(data.temp.max);
 
