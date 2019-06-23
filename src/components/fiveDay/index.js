@@ -55,11 +55,19 @@ class FiveDays extends React.Component {
     render() {
         const { fiveDayData } = this.state;
 
+        console.log(fiveDayData);
+
         if (!fiveDayData) return null;
 
         return (
-            <div>
-                <h1>five days</h1>
+            <div class = "row d-flex justify-content-center">
+                <div class="col-md-12">
+                <div class="row no-gutters">
+                    {fiveDayData.list.map(day => (
+                    <Day data={day} format={this.state.format} fiveTenDays={true}/>
+                    ))}               
+                </div>
+                </div>
             </div>
         )
     }
