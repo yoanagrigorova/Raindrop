@@ -110,6 +110,7 @@ main{
     position: absolute;
     top: 270px;
     right: 100px;
+	text-align:center;
 }
 
 .favourites ul{
@@ -118,4 +119,16 @@ main{
 
 .favourites ul li {
     cursor: pointer;
+}
+
+.favourites li {
+	margin-right: 50px;
+}
+
+.favCity:hover {
+	background-color:  #39C9FF;
+}
+
+.momentImg {
+	margin-left: 70px;
 }

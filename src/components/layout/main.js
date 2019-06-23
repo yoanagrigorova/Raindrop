@@ -212,7 +212,7 @@ class Main extends React.Component {
                             <ul>
                                 {this.state.favourites.map(city => {
                                     return (
-                                        <li key={city} onClick={() => this.setState({ city: city })}>{city}</li>
+                                        <li class = "favCity" key={city} onClick={() => this.setState({ city: city })}>{city}</li>
                                     )
                                 })}
                             </ul>

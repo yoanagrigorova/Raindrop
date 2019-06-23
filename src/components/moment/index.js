@@ -68,7 +68,7 @@ class Moment extends React.Component {
                     <div class="col-md-6" id="currentWeatherBox">
                         <div class="row">
                             <div class="col-md-7">
-                                <div><img src={icon} width="150" height="150" alt="{data.weather[0].description}" title="{data.weather[0].description}"/>
+                                <div><img class = "momentImg" src={icon} width="80" height="80" alt="{data.weather[0].description}" title="{data.weather[0].description}"/>
                                 </div>
                                 <div class="text-center label">{momentData.list[0].weather[0].description}</div><br/>
                                 <div class="text-center label">Вятър</div>
