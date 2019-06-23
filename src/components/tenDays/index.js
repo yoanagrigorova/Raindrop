@@ -54,15 +54,13 @@ class TenDays extends React.Component {
 
     render() {
         const { tenDayData } = this.state;
-        
-        console.log(tenDayData);
 
         if (!tenDayData) return null;
 
         return (
-        <div class = "row d-flex justify-content-center">
+        <div class = "row d-flex justify-content-center" style={{maxWidth:800, overflowX: "auto", flexWrap: "inherit"}}>
             <div class="col-md-12">
-            <div class="row no-gutters">
+            <div class="row no-gutters" style={{flexWrap: "inherit"}}>
                 {tenDayData.list.map(day => (
                 <Day data={day} format={this.state.format} fiveTenDays={true}/>
                 ))}               

@@ -1,50 +1,56 @@
 import React from 'react';
-import Day from '../day/index';
+import Day from '../day';
 import './style.css';
 import request from 'request';
 
 const weatherApiKey = 'f631fd357c75163a46154773a513dd64';
 
-class Moment extends React.Component {
-    constructor(props){
+class Weekend extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={
-            momentData:null,
+
+        this.state = {
+            weekendData: null,
             format: props.format,
-            city:props.city
+            city: props.city,
         }
 
         this.getWeather = this.getWeather.bind(this);
     }
 
-    getWeather(city, format){
+    getWeather(city, format) {
         let self = this;
-        request('https://api.openweathermap.org/data/2.5/forecast/daily?q=' + city + '&appid=' + weatherApiKey + '&lang=bg&cnt=3&units='+format, { json: true }, (err, response, body) => {
+        request('https://api.openweathermap.org/data/2.5/forecast/daily?q=' + city + '&appid=' + weatherApiKey + '&cnt=10&lang=bg&units=' + format, { json: true }, (err, response, body) => {
             if (err) { return console.log(err); }
 
+            let friday = body.list.find(day => new Date(day.dt * 1000).getDay() === 5);
+            let index = body.list.indexOf(friday);
+
             self.setState({
-                momentData: body,
-                format: format
+                format: format,
+                weekendData: {
+                    ...body,
+                    list: body.list.slice(index, index+3)
+                }
             })
-    
         })
+
     }
 
     componentDidMount() {
-        const {city} = this.props;
-        this.getWeather(city, this.state.format);
-        
+        this.getWeather(this.state.city, this.state.format);
+
     }
 
-    componentDidUpdate(){
-        if(this.state.format !== this.props.format){
+    componentDidUpdate() {
+        if (this.state.format !== this.props.format) {
             this.getWeather(this.props.city, this.props.format);
             this.setState({
                 format: this.props.format
             })
         }
 
-        if(this.state.city !== this.props.city){
+        if (this.state.city !== this.props.city) {
             this.getWeather(this.props.city, this.props.format);
             this.setState({
                 city: this.props.city
@@ -53,16 +59,14 @@ class Moment extends React.Component {
     }
 
     render() {
-        const { momentData } = this.state;
+        const { weekendData } = this.state;
+        if (!weekendData) return null;
 
-        if (!momentData) return null;
-
-        var degCelsius = Math.floor(momentData.list[0].temp.day);
-        var icon = 'http://openweathermap.org/img/w/' + momentData.list[0].weather[0].icon + ".png";
+        var degCelsius = Math.floor(weekendData.list[0].temp.day);
+        var icon = 'http://openweathermap.org/img/w/' + weekendData.list[0].weather[0].icon + ".png";
 
         return (
-                                
-            <div class = "row d-flex justify-content-center">
+             <div class = "row d-flex justify-content-center">
                 <div class="col-md-12">
                 <div class="row no-gutters">
                     <div class="col-md-6" id="currentWeatherBox">
@@ -70,12 +74,12 @@ class Moment extends React.Component {
                             <div class="col-md-7">
                                 <div><img src={icon} width="150" height="150" alt="{data.weather[0].description}" title="{data.weather[0].description}"/>
                                 </div>
-                                <div class="text-center label">{momentData.list[0].weather[0].description}</div><br/>
+                                <div class="text-center label">{weekendData.list[0].weather[0].description}</div><br/>
                                 <div class="text-center label">Вятър</div>
                                 <div class="text-center">
                                     <span class="wfByHourWind">
                                         <span class="windImgTopE">&nbsp;</span>
-                                        {momentData.list[0].speed} { this.state.format === "metric" ? "m/s" : "mph"}  </span>
+                                        {weekendData.list[0].speed} { this.state.format === "metric" ? "m/s" : "mph"}  </span>
                                 </div>
                             </div>  
                             <div class="col-md-5"><span id="currentTemp">{degCelsius}&deg;{ this.state.format === "metric" ? "C" : "F"}</span>
@@ -86,8 +90,8 @@ class Moment extends React.Component {
                         </div>
                     </div>
 
-                   {momentData.list.map(day => (
-                    <Day data={day} format={this.state.format}/>
+                   {weekendData.list.map(day => (
+                    <Day data={day} format={this.state.format} weekend={true}/>
                     ))}
 
 
@@ -96,10 +100,7 @@ class Moment extends React.Component {
                 </div>
             </div>
         )
-
     }
-
-
 }
 
-export default Moment;
+export default Weekend;

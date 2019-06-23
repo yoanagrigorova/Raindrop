@@ -99,3 +99,23 @@ main{
 	font-size: 12px;
 	margin-left: 5px;
 }
+
+.favourites{
+    height: 200px;
+    overflow-y: auto;
+    background-color: rgba(57, 201, 255, 0.23);
+    width: 200px;
+    border-radius: 10px;
+    display: inline-block;
+    position: absolute;
+    top: 270px;
+    right: 100px;
+}
+
+.favourites ul{
+    list-style: none;
+}
+
+.favourites ul li {
+    cursor: pointer;
+}

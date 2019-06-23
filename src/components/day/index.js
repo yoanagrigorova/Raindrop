@@ -44,25 +44,25 @@ class Day extends React.Component {
     }
 
     generateDayOfWeek(day){
-        if (day == "Sun") {
+        if (day === "Sun") {
             return "Неделя";
         }
-        if (day == "Mon") {
+        if (day === "Mon") {
             return "Понеделник";
         }
-        if (day == "Tue") {
+        if (day === "Tue") {
             return "Вторник";
         }
-        if (day == "Wed") {
+        if (day === "Wed") {
             return "Сряда";
         }
-        if (day == "Thu") {
+        if (day === "Thu") {
             return "Четвъртък";
         }
-        if (day == "Fri") {
+        if (day === "Fri") {
             return "Петък";
         }
-        if (day == "Sat") {
+        if (day === "Sat") {
             return "Събота";
         }
     }
@@ -80,9 +80,8 @@ class Day extends React.Component {
 
         let icon ='http://openweathermap.org/img/w/'+ data.weather[0].icon+'.png';
         let date = new Date(data.dt*1000).toDateString();
-        console.log(date);
 
-        if(this.props.fiveTenDays === true) {
+        if(this.props.fiveTenDays || this.props.weekend) {
             let day=date.substr(0,date.indexOf(' '));
             var label = this.generateDayOfWeek(day);
             date = this.convert(date);
@@ -108,10 +107,10 @@ class Day extends React.Component {
                 <div class="text-center">{mintemp}&deg;{ this.state.format === "metric" ? "C" : "F"} <b>|</b> {maxtemp}&deg;{ this.state.format === "metric" ? "C" : "F"} </div>
                 <div class="text-center">{data.weather[0].description}</div><br/>
                 <div class="text-center">
-                    <span class="wfByHourWind">
-                        <span class="windImgTopE">&nbsp;</span>
+                    {/* <span class="wfByHourWind"> */}
+                        {/* <span class="windImgTopE">&nbsp;</span> */}
                         {data.speed} { this.state.format === "metric" ? "m/s" : "mph"} 
-                    </span>
+                    {/* </span> */}
                 </div>
 
             </div>

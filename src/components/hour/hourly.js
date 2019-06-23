@@ -64,7 +64,6 @@ class Hourly extends React.Component {
 
     render() {
         const { hourData } = this.state;
-        console.log(hourData)
         if (!hourData) return null;
               
 
