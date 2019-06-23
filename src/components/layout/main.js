@@ -30,7 +30,8 @@ class Main extends React.Component {
             cities: [],
             showSearch: false,
             hideMenu: false, 
-            favourites: []
+            favourites: [],
+            activeTab: 1
         }
 
         this.changeFormat = this.changeFormat.bind(this);
@@ -155,20 +156,20 @@ class Main extends React.Component {
 								<span id = "addToFavourites">Добавете в любими</span>
                             </h1>
                             <ul className="nav nav-pills nav-justified categories">
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/moment">В момента</Link>
+                                <li className="nav-item" onClick = {() => {this.setState({activeTab: 1})}}>
+                                    <Link className={ this.state.activeTab === 1 ? "nav-link active" : "nav-link "} to="/moment">В момента</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link active" to="/24-hour">24 часа</Link>
+                                <li className="nav-item" onClick = {() => {this.setState({activeTab: 2})}}>
+                                    <Link className={ this.state.activeTab === 2 ? "nav-link active" : "nav-link "} to="/24-hour">24 часа</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/fiveDays">5-дневна</Link>
+                                <li className="nav-item" onClick = {() => {this.setState({activeTab: 3})}}>
+                                    <Link className={ this.state.activeTab === 3 ? "nav-link active" : "nav-link "} to="/fiveDays">5-дневна</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/tenDays">10-дневна</Link>
+                                <li className="nav-item" onClick = {() => {this.setState({activeTab: 4})}}>
+                                    <Link className={ this.state.activeTab === 4 ? "nav-link active" : "nav-link "} to="/tenDays">10-дневна</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/weekend">Уикенд</Link>
+                                <li className="nav-item" onClick = {() => {this.setState({activeTab: 5})}}>
+                                    <Link className={ this.state.activeTab === 5 ? "nav-link active" : "nav-link "} to="/weekend">Уикенд</Link>
 
                                 </li>
                             </ul>
