@@ -1,5 +1,6 @@
 import React from 'react';
 import Route from 'react-router-dom/Route';
+import Redirect from 'react-router-dom/Redirect';
 import Switch from 'react-router-dom/Switch';
 import Link from 'react-router-dom/Link';
 import "./main.css"
@@ -198,6 +199,9 @@ class Main extends React.Component {
 
                     <div class="weatherContent">
                         <Switch>
+                            <Route exact path="/" render={() => (
+                                <Redirect to="/moment"/>
+                            )  }/>
                             <Route exact path="/24-hour" render={() => <Hourly city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/moment" render={() => <Moment city={this.state.city} format={this.state.format} />} />
                             <Route exact path="/fiveDays" render={() => <FiveDays city={this.state.city} format={this.state.format} />} />
